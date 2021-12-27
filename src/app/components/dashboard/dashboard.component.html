@@ -1,20 +1,56 @@
-<p>dashboard works!</p>
-<table>
-    <thead>
-        <th>Libelle</th>
-        <th>Price</th>
-        <th>Evaluation du coût</th>
-        <th>Actions</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of products">
-            <td>{{product.label}}</td>
-            <td>{{product.price}}$</td>
-            <td>{{evaluateCost(product)}}</td>
-            <td>
-                <button (click)="save()">Save</button>
-            </td>
-        </tr>
-    </tbody>
-   
-</table>
+<div class="card">
+    <div class="card-header">Product Lists</div>
+    <div class="card-body">
+        <div class="row">
+            <app-category [category]="category" (data)="onUpdateCategory($event)"></app-category>
+              <!--div class="card w-50">
+                <div class="card-body">
+                  <h5 class="card-title">Bags</h5>
+                  <p class="card-text">
+                   50 products
+                  </p>
+                </div>
+              </div-->
+        </div>
+        <div style="margin-top:2%;">
+            <button type="button" class="btn btn-primary btn-sm px-3">
+                <em class="fas fa-plus">register product</em>
+              </button>
+        </div>
+        <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Libelle</th>
+                <th scope="col">Price</th>
+                <th scope="col">Couleur</th>
+                <th scope="col">Evaluation coût</th>
+                <th scope="col">TVA</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of products">
+                <th scope="row">1</th>
+                <td>{{p.label}}</td>
+                <td>{{p.price}}</td>
+                <td>{{p.color}}</td>
+                <td>
+                    <span class="badge" [appBadgePrice]='p.price'></span>
+                    <!--span *ngIf='p?.price!<200' class="badge bg-success">Low</span>
+                    <span *ngIf='p?.price!>200' class="badge bg-danger">High</span>
+                    <span *ngIf='(p?.price!)==200' class="badge bg-primary">Medium</span-->
+                    <!--span [ngClass]=" p?.price! > 200  ?'bg-success':'bg-danger'" class="badge">Success</span-->
+                </td>
+                <td>{{p.price | tvaPrice}}</td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm px-3">
+                    <em class="fas fa-times"></em>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+    </div>
+</div>

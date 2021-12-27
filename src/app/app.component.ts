@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'stock-management';
+
+  onData(event:any){
+    console.log(event);
+  }
 }

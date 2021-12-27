@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Category } from './category-models';
 import { Product } from './product-models';
 
 @Component({
@@ -8,15 +9,28 @@ import { Product } from './product-models';
 })
 export class DashboardComponent implements OnInit {
 
-  products:Product[]=[
-    {label:"test",price:1500,color:"red"},
-    {label:"test",price:1500,color:"red"},
-    {label:"test",price:1500,color:"red"},
-    {label:"test",price:1500,color:"red"}
-  ]
+  products!:Product[];
+  category :Category={
+    libelle:"Computer",
+    qteProduct:25
+  };
+  
   constructor() { }
+  
 
   ngOnInit(): void {
+    this.loadAllData();
+  }
+
+
+  loadAllData(){
+    console.log("init data");
+    this.products=[
+      {label:"Toshiba xp",price:250,color:"red"},
+      {label:"Lenovo Old",price:50,color:"red"},
+      {label:"Lenovo Yoga",price:200,color:"red"},
+      {label:"Apple Macos 2009",price:1500,color:"red"}
+    ];
   }
 
   save(){
@@ -34,6 +48,11 @@ export class DashboardComponent implements OnInit {
       return "too expensive";
     }
     return "cheap";
+  }
+
+  onUpdateCategory(eventData:Category){
+    console.log(eventData);
+    this.loadAllData();
   }
 
 }
